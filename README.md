@@ -1,12 +1,12 @@
 # removestar
 
-[![Actions Status][actions-badge]][actions-link]
-[![PyPI version][pypi-version]][pypi-link]
-[![Anaconda-Server Badge][conda-version]][conda-link]
-[![PyPI platforms][pypi-platforms]][pypi-link]
-[![Downloads][pypi-downloads]][pypi-link]
-[![Conda Downloads][conda-downloads]][conda-link]
-[![Ruff][ruff-badge]][ruff-link]
+[Actions Status][actions-link]
+[PyPI version][pypi-link]
+[Anaconda-Server Badge][conda-link]
+[PyPI platforms][pypi-link]
+[Downloads][pypi-link]
+[Conda Downloads][conda-link]
+[Ruff][ruff-link]
 
 <!-- TODO:
 [![pre-commit.ci status][pre-commit-badge]][pre-commit-link]
@@ -27,7 +27,7 @@ pip install removestar
 or `conda` -
 
 ```bash
-conda install -c conda-forge pybamm
+conda install -c conda-forge removestar
 ```
 
 or add `removestar` in `.pre-commit-config.yaml` -
@@ -93,8 +93,7 @@ Some reasons why `import *` is bad:
   level, `import *` will import every public (doesn't start with an
   underscore) name defined in the module file. This can often include things
   like standard library imports or loop variables defined at the top-level of
-  the file. For imports from modules (from `__init__.py`), `from module import
-*` will include every submodule defined in that module. Using `__all__` in
+  the file. For imports from modules (from `__init__.py`), `from module import *` will include every submodule defined in that module. Using `__all__` in
   modules and `__init__.py` files is also good practice, as these things are
   also often confusing even for interactive use where `import *` is
   acceptable.
@@ -109,13 +108,14 @@ files:
   > In general, don’t use `from modulename import *`. Doing so clutters the
   > importer’s namespace, and makes it much harder for linters to detect
   > undefined names.
-
+  >
 - [PEP 8](https://www.python.org/dev/peps/pep-0008/#imports) (the official
   Python style guide):
 
   > Wildcard imports (`from <module> import *`) should be avoided, as they
   > make it unclear which names are present in the namespace, confusing both
   > readers and many automated tools.
+  >
 
 Unfortunately, if you come across a file in the wild that uses `import *`, it
 can be hard to fix it, because you need to find every name in the file that is
@@ -227,10 +227,8 @@ optional arguments:
 ## Whitelisting star imports
 
 `removestar` does not replace star import lines that are marked with
-[Flake8 `noqa` comments][noqa-comments] that permit star imports (`F401` or
+[Flake8 ][noqa-comments] that permit star imports (`F401` or
 `F403`).
-
-[noqa-comments]: https://flake8.pycqa.org/en/3.1.1/user/ignoring-errors.html#in-line-ignoring-errors
 
 For example, the star imports in this module would be kept:
 
@@ -246,7 +244,6 @@ def func(x):
 
 - Assumes only names in the current file are used by star imports (e.g., it
   won't work to replace star imports in `__init__.py`).
-
 - For files within the same module, removestar determines missing imported names
   statically. For external library imports, including imports of standard
   library modules, it dynamically imports the module to determine the names.
@@ -265,6 +262,7 @@ See the [CHANGELOG](CHANGELOG.md) file.
 
 [MIT](LICENSE)
 
+[noqa-comments]: https://flake8.pycqa.org/en/3.1.1/user/ignoring-errors.html#in-line-ignoring-errors
 [actions-badge]: https://github.com/asmeurer/removestar/workflows/CI/badge.svg
 [actions-link]: https://github.com/asmeurer/removestar/actions
 [codecov-badge]: https://codecov.io/gh/asmeurer/removestar/branch/main/graph/badge.svg?token=YBv60ueORQ
